@@ -9,6 +9,7 @@ app = FastAPI()
 app.include_router(posts_router)
 app.include_router(users_router)
 app.include_router(auth_router)
+
 create_tables()
 @app.get("/")
 async def root():
