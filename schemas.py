@@ -1,3 +1,5 @@
+from typing_extensions import Literal
+
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
@@ -19,7 +21,13 @@ class Post(PostBase):
     class Config:
         orm_mode = True
 
+class PostOut(BaseModel):
+    Post: Post
+    votes: int
 
+    class Config:
+        orm_mode = True
+        from_attributes = True
 
 
 class UserCreate(BaseModel):
@@ -41,3 +49,7 @@ class UserLogin(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+class Vote(BaseModel):
+    post_id: int
+    dir: Literal[0, 1]
